@@ -1,0 +1,19 @@
+# Node.js
+node_modules/
+npm-debug.log
+.env
+
+# Python
+__pycache__/
+*.pyc
+venv/
+env/
+.venv/
+
+# Data & Models (Do not push heavy models or datasets to GitHub)
+ml/data/*.csv
+ml/models/*.pkl
+
+# OS
+.DS_Store
+Thumbs.db
