@@ -1,89 +1,75 @@
 {
   "models": {
     "Logistic Regression": {
-      "accuracy": 1.0,
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1_score": 1.0,
-      "roc_auc": 1.0,
+      "accuracy": 0.9955,
+      "precision": 0.7425,
+      "recall": 0.9981,
+      "f1_score": 0.8515,
+      "roc_auc": 0.9999,
       "confusion_matrix": {
-        "TP": 520,
-        "TN": 39480,
-        "FP": 0,
-        "FN": 0
+        "TP": 519,
+        "TN": 39300,
+        "FP": 180,
+        "FN": 1
       }
     },
     "Random Forest": {
-      "accuracy": 1.0,
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1_score": 1.0,
+      "accuracy": 0.9994,
+      "precision": 0.9646,
+      "recall": 0.9942,
+      "f1_score": 0.9792,
       "roc_auc": 1.0,
       "confusion_matrix": {
-        "TP": 520,
-        "TN": 39480,
-        "FP": 0,
-        "FN": 0
+        "TP": 517,
+        "TN": 39461,
+        "FP": 19,
+        "FN": 3
       }
     },
     "SVM": {
-      "accuracy": 1.0,
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1_score": 1.0,
-      "roc_auc": 1.0,
+      "accuracy": 0.9975,
+      "precision": 0.8418,
+      "recall": 0.9923,
+      "f1_score": 0.9109,
+      "roc_auc": 0.9999,
       "confusion_matrix": {
-        "TP": 520,
-        "TN": 39480,
-        "FP": 0,
-        "FN": 0
+        "TP": 516,
+        "TN": 39383,
+        "FP": 97,
+        "FN": 4
       }
     },
     "Isolation Forest": {
-      "accuracy": 0.9959,
-      "precision": 0.8515,
-      "recall": 0.8269,
-      "f1_score": 0.839,
-      "roc_auc": null,
-      "type": "anomaly_detection"
-    },
-    "LOF": {
-      "accuracy": 0.9738,
-      "precision": 0.0217,
-      "recall": 0.0231,
-      "f1_score": 0.0224,
-      "roc_auc": null,
-      "type": "anomaly_detection"
+      "accuracy": 0.9884,
+      "precision": 0.5539,
+      "recall": 0.5635,
+      "f1_score": 0.5586,
+      "roc_auc": null
     }
   },
   "feature_importance": {
-    "impossible_travel_flag": 0.2979,
-    "geo_distance": 0.2351,
-    "account_age": 0.2153,
-    "login_attempts": 0.1155,
-    "device_change_flag": 0.0444,
-    "is_night_flag": 0.0291,
-    "avg_transaction": 0.0135,
-    "log_amount": 0.0117,
-    "balance_change_dest": 0.01,
-    "type_encoded": 0.0081,
-    "QR_flag": 0.0054,
-    "large_transaction_flag": 0.0047,
-    "balance_change_org": 0.0043,
-    "hour_of_day": 0.0031,
-    "balance_ratio": 0.0019,
-    "transactions_per_user": 0.0,
-    "transactions_last_1hr": 0.0,
-    "device_type_encoded": 0.0,
-    "deviation_from_avg": 0.0,
-    "OTP_flag": 0.0
+    "login_attempts": 0.3425,
+    "transactions_per_user": 0.3316,
+    "account_age": 0.0941,
+    "device_change_flag": 0.0857,
+    "log_amount": 0.0359,
+    "is_night_flag": 0.032,
+    "type_encoded": 0.0244,
+    "large_transaction_flag": 0.0115,
+    "balance_ratio": 0.0095,
+    "geo_distance": 0.0079,
+    "impossible_travel_flag": 0.0073,
+    "hour_of_day": 0.0072,
+    "avg_transaction": 0.005,
+    "QR_flag": 0.0048,
+    "device_type_encoded": 0.0004,
+    "OTP_flag": 0.0002,
+    "transactions_last_1hr": 0.0
   },
   "primary_model": "Random Forest",
   "feature_columns": [
     "log_amount",
     "large_transaction_flag",
-    "balance_change_org",
-    "balance_change_dest",
     "balance_ratio",
     "type_encoded",
     "transactions_per_user",
@@ -93,7 +79,6 @@
     "geo_distance",
     "impossible_travel_flag",
     "avg_transaction",
-    "deviation_from_avg",
     "account_age",
     "hour_of_day",
     "is_night_flag",
