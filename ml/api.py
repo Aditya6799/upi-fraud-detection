@@ -19,7 +19,7 @@ CHARTS_DIR = Path(__file__).parent / "charts"
 @app.route("/health", methods=["GET"])
 def health():
     """Health check endpoint."""
-    return jsonify({"status": "ok", "service": "UPI Fraud Detection ML API"})
+    return jsonify({"status": "ok", "service": "UPI Fraud Detection ML API"}), 200
 
 
 @app.route("/predict", methods=["POST"])

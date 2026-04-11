@@ -11,6 +11,7 @@ const path = require("path");
 const predictRoutes = require("./routes/predict");
 const chatRoutes = require("./routes/chat");
 const transactionRoutes = require("./routes/transactions");
+const { uptime } = require("process");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -45,10 +46,11 @@ app.get("/api/metrics", async (req, res) => {
 
 // Health check
 app.get("/api/health", (req, res) => {
-  res.json({
+  res.status(200).json({
     status: "ok",
     service: "UPI Fraud Detection Backend",
     timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
   });
 });
 
