@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UPI Fraud Detection — AI-Powered Detection System</title>
+  <meta name="description" content="Adaptive AI-Based UPI Fraud Detection System with Hybrid Machine Learning, Advanced Transaction Simulation, and Gemini AI Chatbot">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="app-layout">
+
+    <!-- ═══ SIDEBAR ═══ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-icon">
+          <span class="material-symbols-outlined">shield</span>
+        </div>
+        <div>
+          <h1>UPI Fraud Detection</h1>
+          <span>AI-Powered System</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-link active" id="nav-dashboard">
+          <span class="material-symbols-outlined">dashboard</span>
+          Dashboard
+        </a>
+        <a href="simulation.html" class="nav-link" id="nav-simulator">
+          <span class="material-symbols-outlined">science</span>
+          Advanced Simulator
+        </a>
+        <a href="history.html" class="nav-link" id="nav-history">
+          <span class="material-symbols-outlined">receipt_long</span>
+          Transaction History
+        </a>
+        <a href="research.html" class="nav-link" id="nav-research">
+          <span class="material-symbols-outlined">lab_research</span>
+          Research Paper
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="nav-link" id="nav-theme" onclick="toggleTheme()" style="cursor:pointer">
+          <span class="material-symbols-outlined" id="theme-icon">light_mode</span>
+          <span id="theme-label">Light Mode</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ═══ MAIN CONTENT ═══ -->
+    <main class="main-content">
+
+      <!-- Top Bar -->
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <h2>Command Center</h2>
+          <p>Real-time UPI fraud monitoring & simulation</p>
+        </div>
+        <div class="top-bar-right">
+          <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme"></div>
+        </div>
+      </div>
+
+      <!-- Dashboard Metrics -->
+      <div class="metrics-grid" id="metrics-grid">
+        <div class="metric-card primary">
+          <div class="metric-label">Total Transactions</div>
+          <div class="metric-value" id="stat-total">0</div>
+          <div class="metric-change positive">
+            <span class="material-symbols-outlined" style="font-size:14px">trending_up</span>
+            Live tracking
+          </div>
+        </div>
+        <div class="metric-card danger">
+          <div class="metric-label">Fraud Detected</div>
+          <div class="metric-value" id="stat-fraud">0</div>
+          <div class="metric-change negative">
+            <span class="material-symbols-outlined" style="font-size:14px">warning</span>
+            Blocked
+          </div>
+        </div>
+        <div class="metric-card safe">
+          <div class="metric-label">Safe Transactions</div>
+          <div class="metric-value" id="stat-safe">0</div>
+          <div class="metric-change positive">
+            <span class="material-symbols-outlined" style="font-size:14px">verified</span>
+            Verified
+          </div>
+        </div>
+        <div class="metric-card warning">
+          <div class="metric-label">Detection Rate</div>
+          <div class="metric-value" id="stat-rate">0%</div>
+          <div class="metric-change positive">
+            <span class="material-symbols-outlined" style="font-size:14px">speed</span>
+            Hybrid engine
+          </div>
+        </div>
+      </div>
+
+      <!-- Split Layout: Simulation + Chatbot -->
+      <div class="split-layout">
+
+        <!-- LEFT — Quick Simulation -->
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <h3>
+                <span class="material-symbols-outlined" style="vertical-align:middle;margin-right:0.375rem;color:var(--primary)">bolt</span>
+                Quick Simulation
+              </h3>
+              <span class="label-sm">REAL-TIME ANALYSIS</span>
+            </div>
+
+            <!-- Simulation Modes -->
+            <div class="sim-modes">
+              <button class="sim-mode-btn active-normal" data-mode="normal" onclick="setSimMode('normal', this)">
+                ✅ Normal
+              </button>
+              <button class="sim-mode-btn" data-mode="suspicious" onclick="setSimMode('suspicious', this)">
+                ⚡ Suspicious
+              </button>
+              <button class="sim-mode-btn" data-mode="fraud" onclick="setSimMode('fraud', this)">
+                🚨 Fraud
+              </button>
+            </div>
+
+            <!-- Simulation Form -->
+            <form id="quick-sim-form" onsubmit="runQuickSimulation(event)">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Sender ID</label>
+                  <input type="text" class="form-input" id="qs-sender" placeholder="e.g. user@upi" value="sender_001">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Receiver ID</label>
+                  <input type="text" class="form-input" id="qs-receiver" placeholder="e.g. merchant@upi" value="receiver_001">
+                </div>
+              </div>
+
+              <div class="form-row-3">
+                <div class="form-group">
+                  <label class="form-label">Amount (₹)</label>
+                  <input type="number" class="form-input" id="qs-amount" placeholder="500" value="1500" min="1" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Account Age (days)</label>
+                  <input type="number" class="form-input" id="qs-account-age" value="365" min="1">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Avg Transaction (₹)</label>
+                  <input type="number" class="form-input" id="qs-avg-tx" value="1200" min="0">
+                </div>
+              </div>
+
+              <div class="form-row-3">
+                <div class="form-group">
+                  <label class="form-label">Device Change</label>
+                  <select class="form-select" id="qs-device-change">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Login Attempts</label>
+                  <input type="number" class="form-input" id="qs-login" value="1" min="1" max="10">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Night Transaction</label>
+                  <select class="form-select" id="qs-night">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                  </select>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg btn-full" id="simulate-btn">
+                <span class="material-symbols-outlined">play_arrow</span>
+                Analyze Transaction
+              </button>
+            </form>
+
+            <!-- Result Panel -->
+            <div id="result-panel" class="result-panel hidden"></div>
+          </div>
+
+          <!-- Feature Importance Chart -->
+          <div class="card mt-2" id="feature-chart-card" style="display:none">
+            <div class="card-header">
+              <h3>Feature Importance</h3>
+              <span class="label-sm">RANDOM FOREST</span>
+            </div>
+            <div class="chart-container">
+              <canvas id="feature-chart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT — Chatbot -->
+        <div class="chatbot-panel" id="chatbot-panel">
+          <div class="chatbot-header">
+            <div class="chatbot-status"></div>
+            <div>
+              <div class="title-sm">UPI Fraud AI Assistant</div>
+              <div class="body-sm text-muted">Powered by Google Gemini</div>
+            </div>
+          </div>
+
+          <div class="chatbot-messages" id="chat-messages">
+            <div class="chat-message bot">
+              👋 I'm your <strong>UPI Fraud Detection Assistant</strong>. I can help you understand fraud analysis results, prevention tips, and how our AI system works.<br><br>
+              Try simulating a transaction, and I'll explain the results!
+            </div>
+          </div>
+
+          <div class="chatbot-input">
+            <input type="text" id="chat-input" placeholder="Ask about UPI fraud..." onkeydown="if(event.key==='Enter')sendChat()">
+            <button onclick="sendChat()" title="Send">
+              <span class="material-symbols-outlined">send</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Analyzing Overlay -->
+  <div id="analyzing-overlay" class="analyzing-overlay hidden">
+    <div class="analyzing-card">
+      <div class="analyzing-spinner"></div>
+      <h3>Analyzing Transaction</h3>
+      <p>Running hybrid detection engine...</p>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/simulator.js"></script>
+  <script src="js/chatbot.js"></script>
+  <script src="js/charts.js"></script>
+</body>
+</html>

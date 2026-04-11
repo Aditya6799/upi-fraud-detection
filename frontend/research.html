@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research Paper — UPI Fraud Detection</title>
+  <meta name="description" content="Research paper on Adaptive AI-Based UPI Fraud Detection System with Hybrid Machine Learning">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+  <div class="app-layout">
+
+    <!-- ═══ SIDEBAR ═══ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-icon">
+          <span class="material-symbols-outlined">shield</span>
+        </div>
+        <div>
+          <h1>UPI Fraud Detection</h1>
+          <span>AI-Powered System</span>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-link"><span class="material-symbols-outlined">dashboard</span>Dashboard</a>
+        <a href="simulation.html" class="nav-link"><span class="material-symbols-outlined">science</span>Advanced Simulator</a>
+        <a href="history.html" class="nav-link"><span class="material-symbols-outlined">receipt_long</span>Transaction History</a>
+        <a href="research.html" class="nav-link active"><span class="material-symbols-outlined">lab_research</span>Research Paper</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="nav-link" onclick="toggleTheme()" style="cursor:pointer">
+          <span class="material-symbols-outlined" id="theme-icon">light_mode</span>
+          <span id="theme-label">Light Mode</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ═══ MAIN ═══ -->
+    <main class="main-content">
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <h2>Research Paper</h2>
+          <p>Academic documentation of our fraud detection methodology</p>
+        </div>
+        <div class="top-bar-right">
+          <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="research-content">
+
+          <h1>Adaptive AI-Based UPI Fraud Detection System with Hybrid Machine Learning</h1>
+          <div class="research-meta">
+            <span>📄 Research Paper</span>
+            <span>🗓️ April 2026</span>
+            <span>🏫 INT428 Project</span>
+            <span>🔬 Machine Learning & AI</span>
+          </div>
+
+          <!-- Abstract -->
+          <h2>Abstract</h2>
+          <p>
+            The rapid proliferation of Unified Payments Interface (UPI) transactions in India has created an unprecedented
+            attack surface for financial fraud. This paper presents an adaptive, hybrid machine learning system designed
+            to detect fraudulent UPI transactions in real-time. Our system combines supervised learning models (Random Forest,
+            Logistic Regression, SVM), unsupervised anomaly detection (Isolation Forest, Local Outlier Factor), and
+            domain-specific rule-based logic into a weighted ensemble architecture. Using the PaySim synthetic mobile
+            money dataset augmented with UPI-specific features (device fingerprinting, geolocation analysis, behavioral
+            profiling, and security signals), our system achieves robust detection performance. The hybrid engine
+            produces a unified risk score (0–100) with explainable reasons, enabling both automated blocking and
+            human-in-the-loop investigation workflows. An integrated Gemini-powered chatbot provides contextual
+            explanations for each detection decision.
+          </p>
+
+          <!-- Introduction -->
+          <h2>1. Introduction</h2>
+          <p>
+            India's UPI ecosystem processed over 13 billion transactions worth ₹20.64 lakh crore in a single month (2024),
+            making it the world's largest real-time payment system. However, this scale also attracts sophisticated
+            fraud actors exploiting phishing, social engineering, QR code manipulation, SIM swaps, and mule account
+            networks. Traditional rule-based fraud detection systems struggle to adapt to evolving attack vectors,
+            while pure machine learning approaches often lack interpretability crucial for regulatory compliance.
+          </p>
+          <p>
+            Our system addresses these challenges through a hybrid architecture that combines the pattern recognition
+            strength of ML with the interpretability and domain expertise of rule-based systems. Key contributions include:
+          </p>
+          <ul>
+            <li><strong>Hybrid Detection Engine:</strong> A weighted ensemble combining ML prediction (50%), anomaly detection (20%), and rule-based scoring (30%)</li>
+            <li><strong>UPI Feature Engineering:</strong> 20 engineered features spanning transaction, velocity, device, geolocation, behavioral, and security dimensions</li>
+            <li><strong>Real-time Simulation:</strong> Interactive transaction simulator with Normal/Suspicious/Fraud presets for testing and demonstration</li>
+            <li><strong>Explainable AI:</strong> Every detection decision includes human-readable reasons and feature importance scores</li>
+            <li><strong>Conversational Intelligence:</strong> Gemini-powered chatbot for contextual fraud explanations</li>
+          </ul>
+
+          <!-- Problem Statement -->
+          <h2>2. Problem Statement</h2>
+          <p>
+            The system is designed to detect 10 distinct fraud categories:
+          </p>
+          <ol>
+            <li><strong>Real-time fraud detection</strong> before transaction settlement</li>
+            <li><strong>Phishing-induced authorized fraud</strong> where victims unknowingly authorize transactions</li>
+            <li><strong>OTP-sharing fraud</strong> even after valid authentication</li>
+            <li><strong>Fake QR code scams</strong> redirecting payments to fraudulent accounts</li>
+            <li><strong>Account Takeover (ATO)</strong> attacks via SIM swap or credential theft</li>
+            <li><strong>Mule account networks</strong> used for money laundering</li>
+            <li><strong>Abnormal transaction velocity</strong> patterns indicating automated fraud</li>
+            <li><strong>Geo-location inconsistencies</strong> (impossible travel)</li>
+            <li><strong>Device fingerprint mismatches</strong> suggesting unauthorized access</li>
+            <li><strong>Zero-day fraud</strong> using unsupervised anomaly detection</li>
+          </ol>
+
+          <!-- Methodology -->
+          <h2>3. Methodology</h2>
+
+          <h3>3.1 Dataset</h3>
+          <p>
+            We use the <strong>PaySim</strong> mobile money simulator dataset (Kaggle) as our base, which contains
+            synthetic financial transaction data generated from real mobile money transaction logs. The dataset
+            includes features like transaction type, amount, sender/receiver balances, and fraud labels.
+            We augment this with 20 UPI-specific engineered features.
+          </p>
+
+          <h3>3.2 Feature Engineering</h3>
+          <p>Our 20-feature vector spans six dimensions:</p>
+          <ul>
+            <li><strong>Transaction:</strong> log_amount, large_transaction_flag, balance_change_org/dest, balance_ratio</li>
+            <li><strong>Velocity:</strong> transactions_per_user, transactions_last_1hr</li>
+            <li><strong>Device:</strong> device_type_encoded, device_change_flag</li>
+            <li><strong>Geolocation:</strong> geo_distance, impossible_travel_flag</li>
+            <li><strong>Behavioral:</strong> avg_transaction, deviation_from_avg, account_age</li>
+            <li><strong>Security:</strong> OTP_flag, QR_flag, login_attempts, hour_of_day, is_night_flag</li>
+          </ul>
+
+          <h3>3.3 Class Imbalance Handling</h3>
+          <p>
+            With a natural fraud rate of ~1.3%, we apply <strong>SMOTE</strong> (Synthetic Minority Oversampling Technique)
+            to generate synthetic fraud samples, rebalancing the training set to a 2:1 ratio. This significantly
+            improves recall without sacrificing precision.
+          </p>
+
+          <h3>3.4 Model Architecture</h3>
+          <p><strong>Supervised Models (Known Fraud Patterns):</strong></p>
+          <ul>
+            <li><strong>Random Forest (Primary):</strong> 200 estimators, max_depth=15, balanced class weights</li>
+            <li><strong>Logistic Regression:</strong> L2 regularization, balanced weights, baseline comparison</li>
+            <li><strong>SVM:</strong> RBF kernel with probability estimates for ensemble scoring</li>
+          </ul>
+          <p><strong>Unsupervised Models (Anomaly Detection):</strong></p>
+          <ul>
+            <li><strong>Isolation Forest:</strong> 200 estimators, contamination=0.013, detects novel fraud patterns</li>
+            <li><strong>Local Outlier Factor (LOF):</strong> 20 neighbors, novelty detection mode</li>
+          </ul>
+
+          <h3>3.5 Hybrid Scoring Engine</h3>
+          <p>
+            The final fraud score is a weighted combination:
+          </p>
+          <p style="text-align:center;font-family:var(--font-display);font-size:1.125rem;padding:1rem;background:var(--bg-section);border-radius:var(--radius-md)">
+            <strong>fraud_score = 0.50 × ML_probability + 0.20 × anomaly_score + 0.30 × rule_score</strong>
+          </p>
+          <p>
+            Classification thresholds: <strong>FRAUD</strong> (≥0.6), <strong>SUSPICIOUS</strong> (0.3–0.6), <strong>SAFE</strong> (<0.3).
+          </p>
+
+          <!-- Results -->
+          <h2>4. Results</h2>
+          <p>
+            Model performance was evaluated on a held-out 20% test set using standard classification metrics.
+            The metrics below are dynamically loaded from the trained model:
+          </p>
+
+          <div id="research-metrics" class="mt-2">
+            <div class="metrics-grid" style="grid-template-columns: repeat(5, 1fr)">
+              <div class="metric-card primary">
+                <div class="metric-label">Accuracy</div>
+                <div class="metric-value" id="res-accuracy">—</div>
+              </div>
+              <div class="metric-card safe">
+                <div class="metric-label">Precision</div>
+                <div class="metric-value" id="res-precision">—</div>
+              </div>
+              <div class="metric-card warning">
+                <div class="metric-label">Recall</div>
+                <div class="metric-value" id="res-recall">—</div>
+              </div>
+              <div class="metric-card danger">
+                <div class="metric-label">F1-Score</div>
+                <div class="metric-value" id="res-f1">—</div>
+              </div>
+              <div class="metric-card primary">
+                <div class="metric-label">ROC-AUC</div>
+                <div class="metric-value" id="res-auc">—</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Confusion Matrix Image -->
+          <h3>4.1 Confusion Matrix</h3>
+          <p>The confusion matrix for the primary Random Forest model:</p>
+          <img src="/ml/charts/confusion_matrix.png" alt="Confusion Matrix" class="research-img" onerror="this.style.display='none'">
+
+          <!-- ROC Curve Image -->
+          <h3>4.2 ROC Curves</h3>
+          <p>ROC curves comparing all supervised models:</p>
+          <img src="/ml/charts/roc_curves.png" alt="ROC Curves" class="research-img" onerror="this.style.display='none'">
+
+          <!-- Feature Importance -->
+          <h3>4.3 Feature Importance</h3>
+          <p>Top features contributing to fraud detection as determined by the Random Forest model:</p>
+          <img src="/ml/charts/feature_importance.png" alt="Feature Importance" class="research-img" onerror="this.style.display='none'">
+
+          <!-- Model Comparison -->
+          <h3>4.4 Model Comparison</h3>
+          <img src="/ml/charts/model_comparison.png" alt="Model Comparison" class="research-img" onerror="this.style.display='none'">
+
+          <!-- Conclusion -->
+          <h2>5. Conclusion</h2>
+          <p>
+            We have demonstrated that a hybrid approach combining supervised machine learning, unsupervised anomaly
+            detection, and domain-specific rules provides robust and interpretable UPI fraud detection. The weighted
+            ensemble architecture allows each component to contribute its strengths: ML captures complex learned
+            patterns, anomaly detection identifies novel threats, and rules encode domain expertise.
+          </p>
+          <p>
+            The system's real-time analysis capability, combined with explainable outputs and conversational AI
+            assistance, makes it suitable for both automated fraud prevention and analyst-driven investigation
+            workflows. SMOTE effectively addresses the inherent class imbalance in fraud datasets, significantly
+            improving recall without unacceptable precision loss.
+          </p>
+
+          <!-- Future Scope -->
+          <h2>6. Future Scope</h2>
+          <ul>
+            <li><strong>Graph Neural Networks:</strong> Model transaction networks to detect mule account rings and money laundering chains</li>
+            <li><strong>Federated Learning:</strong> Train across multiple banks without sharing sensitive transaction data</li>
+            <li><strong>Deep Learning:</strong> LSTM/Transformer models for sequential transaction pattern recognition</li>
+            <li><strong>Real-time Streaming:</strong> Apache Kafka integration for sub-millisecond detection on live UPI rails</li>
+            <li><strong>Adversarial Robustness:</strong> Test and harden against adversarial attacks on the ML pipeline</li>
+            <li><strong>Regulatory Compliance:</strong> Automated reporting for RBI guidelines and PCI-DSS requirements</li>
+            <li><strong>Biometric Integration:</strong> Incorporate fingerprint/face recognition confidence scores</li>
+            <li><strong>Cross-border Analysis:</strong> Extend to international payment systems (SWIFT, SEPA)</li>
+          </ul>
+
+          <div class="section-divider"></div>
+          <p class="text-muted text-center body-sm">
+            © 2026 UPI Fraud Detection — Adaptive AI-Based Detection System | INT428 Project
+          </p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    /* Load metrics for research page */
+    async function loadResearchMetrics() {
+      try {
+        const res = await fetch('/api/metrics');
+        const data = await res.json();
+        if (data.success && data.metrics) {
+          const rf = data.metrics.models?.['Random Forest'];
+          if (rf) {
+            document.getElementById('res-accuracy').textContent = (rf.accuracy * 100).toFixed(1) + '%';
+            document.getElementById('res-precision').textContent = (rf.precision * 100).toFixed(1) + '%';
+            document.getElementById('res-recall').textContent = (rf.recall * 100).toFixed(1) + '%';
+            document.getElementById('res-f1').textContent = (rf.f1_score * 100).toFixed(1) + '%';
+            document.getElementById('res-auc').textContent = (rf.roc_auc * 100).toFixed(1) + '%';
+          }
+        }
+      } catch (err) {
+        console.log('Metrics not yet available — train the model first');
+      }
+    }
+    document.addEventListener('DOMContentLoaded', loadResearchMetrics);
+  </script>
+</body>
+</html>

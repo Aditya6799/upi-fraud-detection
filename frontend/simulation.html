@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Simulator — UPI Fraud Detection</title>
+  <meta name="description" content="Advanced UPI transaction simulator with device, location, behavioral, and security parameter controls">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="app-layout">
+
+    <!-- ═══ SIDEBAR ═══ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-icon">
+          <span class="material-symbols-outlined">shield</span>
+        </div>
+        <div>
+          <h1>UPI Fraud Detection</h1>
+          <span>AI-Powered System</span>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-link"><span class="material-symbols-outlined">dashboard</span>Dashboard</a>
+        <a href="simulation.html" class="nav-link active"><span class="material-symbols-outlined">science</span>Advanced Simulator</a>
+        <a href="history.html" class="nav-link"><span class="material-symbols-outlined">receipt_long</span>Transaction History</a>
+        <a href="research.html" class="nav-link"><span class="material-symbols-outlined">lab_research</span>Research Paper</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="nav-link" onclick="toggleTheme()" style="cursor:pointer">
+          <span class="material-symbols-outlined" id="theme-icon">light_mode</span>
+          <span id="theme-label">Light Mode</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ═══ MAIN ═══ -->
+    <main class="main-content">
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <h2>Advanced Transaction Simulator</h2>
+          <p>Full-parameter fraud analysis with 20+ engineered features</p>
+        </div>
+        <div class="top-bar-right">
+          <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme"></div>
+        </div>
+      </div>
+
+      <!-- Simulation Modes -->
+      <div class="sim-modes" style="max-width:500px">
+        <button class="sim-mode-btn active-normal" data-mode="normal" onclick="setAdvancedMode('normal', this)">✅ Normal</button>
+        <button class="sim-mode-btn" data-mode="suspicious" onclick="setAdvancedMode('suspicious', this)">⚡ Suspicious</button>
+        <button class="sim-mode-btn" data-mode="fraud" onclick="setAdvancedMode('fraud', this)">🚨 Fraud</button>
+      </div>
+
+      <div class="split-layout" style="grid-template-columns: 1fr 1fr 380px">
+        <!-- LEFT — Form -->
+        <div>
+          <form id="adv-sim-form" onsubmit="runAdvancedSimulation(event)">
+
+            <!-- Basic Info -->
+            <div class="collapsible open">
+              <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                <h4><span class="material-symbols-outlined">person</span> Basic Transaction</h4>
+                <span class="material-symbols-outlined chevron">expand_more</span>
+              </div>
+              <div class="collapsible-content"><div class="collapsible-body">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Sender ID</label>
+                    <input type="text" class="form-input" id="adv-sender" value="user_12345@upi">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Receiver ID</label>
+                    <input type="text" class="form-input" id="adv-receiver" value="merchant_67890@upi">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Amount (₹)</label>
+                    <input type="number" class="form-input" id="adv-amount" value="2500" min="1" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Transaction Type</label>
+                    <select class="form-select" id="adv-type">
+                      <option value="PAYMENT">Payment</option>
+                      <option value="TRANSFER" selected>Transfer</option>
+                      <option value="CASH_OUT">Cash Out</option>
+                      <option value="CASH_IN">Cash In</option>
+                      <option value="DEBIT">Debit</option>
+                    </select>
+                  </div>
+                </div>
+              </div></div>
+            </div>
+
+            <!-- Device -->
+            <div class="collapsible open">
+              <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                <h4><span class="material-symbols-outlined">smartphone</span> Device Information</h4>
+                <span class="material-symbols-outlined chevron">expand_more</span>
+              </div>
+              <div class="collapsible-content"><div class="collapsible-body">
+                <div class="form-row-3">
+                  <div class="form-group">
+                    <label class="form-label">Device Type</label>
+                    <select class="form-select" id="adv-device-type">
+                      <option value="0">Android</option>
+                      <option value="1">iOS</option>
+                      <option value="2">Web</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Device ID</label>
+                    <input type="text" class="form-input" id="adv-device-id" value="DEV_A1B2C3" placeholder="Device fingerprint">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Device Changed</label>
+                    <select class="form-select" id="adv-device-change">
+                      <option value="0">No</option>
+                      <option value="1">Yes</option>
+                    </select>
+                  </div>
+                </div>
+              </div></div>
+            </div>
+
+            <!-- Location -->
+            <div class="collapsible open">
+              <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                <h4><span class="material-symbols-outlined">location_on</span> Geolocation</h4>
+                <span class="material-symbols-outlined chevron">expand_more</span>
+              </div>
+              <div class="collapsible-content"><div class="collapsible-body">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Current Location</label>
+                    <input type="text" class="form-input" id="adv-curr-location" value="Mumbai, India" placeholder="City, Country">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Previous Location</label>
+                    <input type="text" class="form-input" id="adv-prev-location" value="Mumbai, India" placeholder="City, Country">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Latitude</label>
+                    <input type="number" class="form-input" id="adv-lat" value="19.076" step="0.001">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Longitude</label>
+                    <input type="number" class="form-input" id="adv-lng" value="72.8777" step="0.001">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Geo Distance (km)</label>
+                    <input type="number" class="form-input" id="adv-geo-dist" value="5" min="0">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Impossible Travel</label>
+                    <select class="form-select" id="adv-impossible-travel">
+                      <option value="0">No</option>
+                      <option value="1">Yes</option>
+                    </select>
+                  </div>
+                </div>
+              </div></div>
+            </div>
+
+            <!-- Time -->
+            <div class="collapsible open">
+              <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                <h4><span class="material-symbols-outlined">schedule</span> Time Context</h4>
+                <span class="material-symbols-outlined chevron">expand_more</span>
+              </div>
+              <div class="collapsible-content"><div class="collapsible-body">
+                <div class="form-row-3">
+                  <div class="form-group">
+                    <label class="form-label">Transaction Time</label>
+                    <input type="time" class="form-input" id="adv-time" value="14:30">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Hour of Day</label>
+                    <input type="number" class="form-input" id="adv-hour" value="14" min="0" max="23">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Night Transaction</label>
+                    <select class="form-select" id="adv-night">
+                      <option value="0">No</option>
+                      <option value="1">Yes</option>
+                    </select>
+                  </div>
+                </div>
+              </div></div>
+            </div>
+
+            <!-- Behavioral -->
+            <div class="collapsible open">
+              <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                <h4><span class="material-symbols-outlined">psychology</span> Behavioral Analysis</h4>
+                <span class="material-symbols-outlined chevron">expand_more</span>
+              </div>
+              <div class="collapsible-content"><div class="collapsible-body">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Account Age (days)</label>
+                    <input type="number" class="form-input" id="adv-account-age" value="730" min="1">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Avg Transaction (₹)</label>
+                    <input type="number" class="form-input" id="adv-avg-tx" value="2000" min="0">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Transaction Frequency</label>
+                    <input type="number" class="form-input" id="adv-tx-freq" value="10" min="1">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Transactions Last 1hr</label>
+                    <input type="number" class="form-input" id="adv-tx-1hr" value="1" min="0">
+                  </div>
+                </div>
+              </div></div>
+            </div>
+
+            <!-- Security -->
+            <div class="collapsible open">
+              <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                <h4><span class="material-symbols-outlined">security</span> Security Parameters</h4>
+                <span class="material-symbols-outlined chevron">expand_more</span>
+              </div>
+              <div class="collapsible-content"><div class="collapsible-body">
+                <div class="form-row-3">
+                  <div class="form-group">
+                    <label class="form-label">OTP Used</label>
+                    <select class="form-select" id="adv-otp">
+                      <option value="1" selected>Yes</option>
+                      <option value="0">No</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">QR Code Used</label>
+                    <select class="form-select" id="adv-qr">
+                      <option value="0" selected>No</option>
+                      <option value="1">Yes</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Login Attempts</label>
+                    <input type="number" class="form-input" id="adv-login" value="1" min="1" max="10">
+                  </div>
+                </div>
+              </div></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg btn-full mt-2">
+              <span class="material-symbols-outlined">play_arrow</span>
+              Run Full Analysis
+            </button>
+          </form>
+        </div>
+
+        <!-- RIGHT — Results -->
+        <div>
+          <div class="card" id="adv-result-card">
+            <div class="card-header">
+              <h3>Analysis Results</h3>
+              <span class="label-sm">HYBRID ENGINE</span>
+            </div>
+            <div id="adv-result-panel">
+              <div class="empty-state">
+                <div class="icon">🔬</div>
+                <h3>Ready to Analyze</h3>
+                <p>Configure parameters and run the simulation to see fraud detection results.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature Importance -->
+          <div class="card mt-2" id="adv-feature-card" style="display:none">
+            <div class="card-header">
+              <h3>Feature Importance</h3>
+              <span class="label-sm">SHAP-INSPIRED</span>
+            </div>
+            <div class="chart-container">
+              <canvas id="adv-feature-chart"></canvas>
+            </div>
+          </div>
+
+          <!-- Score Breakdown -->
+          <div class="card mt-2" id="adv-breakdown-card" style="display:none">
+            <div class="card-header">
+              <h3>Score Breakdown</h3>
+              <span class="label-sm">ENSEMBLE</span>
+            </div>
+            <div class="chart-container">
+              <canvas id="adv-breakdown-chart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT — AI Assistant Chatbot -->
+        <div class="chatbot-panel" id="chatbot-panel">
+          <div class="chatbot-header">
+            <div class="chatbot-status"></div>
+            <div>
+              <div class="title-sm">UPI Fraud AI Assistant</div>
+              <div class="body-sm text-muted">Powered by Google Gemini</div>
+            </div>
+          </div>
+
+          <div class="chatbot-messages" id="chat-messages">
+            <div class="chat-message bot">
+              👋 I'm your <strong>UPI Fraud Detection Assistant</strong>. Run a full analysis and I'll explain the results in detail!<br><br>
+              You can also ask me anything about UPI fraud prevention.
+            </div>
+          </div>
+
+          <div class="chatbot-input">
+            <input type="text" id="chat-input" placeholder="Ask about UPI fraud..." onkeydown="if(event.key==='Enter')sendChat()">
+            <button onclick="sendChat()" title="Send">
+              <span class="material-symbols-outlined">send</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Analyzing Overlay -->
+  <div id="analyzing-overlay" class="analyzing-overlay hidden">
+    <div class="analyzing-card">
+      <div class="analyzing-spinner"></div>
+      <h3>Analyzing Transaction</h3>
+      <p>Running hybrid detection engine...</p>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/simulator.js"></script>
+  <script src="js/chatbot.js"></script>
+  <script src="js/charts.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+{
+  "models": {
+    "Logistic Regression": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "roc_auc": 1.0,
+      "confusion_matrix": {
+        "TP": 520,
+        "TN": 39480,
+        "FP": 0,
+        "FN": 0
+      }
+    },
+    "Random Forest": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "roc_auc": 1.0,
+      "confusion_matrix": {
+        "TP": 520,
+        "TN": 39480,
+        "FP": 0,
+        "FN": 0
+      }
+    },
+    "SVM": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "roc_auc": 1.0,
+      "confusion_matrix": {
+        "TP": 520,
+        "TN": 39480,
+        "FP": 0,
+        "FN": 0
+      }
+    },
+    "Isolation Forest": {
+      "accuracy": 0.9959,
+      "precision": 0.8515,
+      "recall": 0.8269,
+      "f1_score": 0.839,
+      "roc_auc": null,
+      "type": "anomaly_detection"
+    },
+    "LOF": {
+      "accuracy": 0.9738,
+      "precision": 0.0217,
+      "recall": 0.0231,
+      "f1_score": 0.0224,
+      "roc_auc": null,
+      "type": "anomaly_detection"
+    }
+  },
+  "feature_importance": {
+    "impossible_travel_flag": 0.2979,
+    "geo_distance": 0.2351,
+    "account_age": 0.2153,
+    "login_attempts": 0.1155,
+    "device_change_flag": 0.0444,
+    "is_night_flag": 0.0291,
+    "avg_transaction": 0.0135,
+    "log_amount": 0.0117,
+    "balance_change_dest": 0.01,
+    "type_encoded": 0.0081,
+    "QR_flag": 0.0054,
+    "large_transaction_flag": 0.0047,
+    "balance_change_org": 0.0043,
+    "hour_of_day": 0.0031,
+    "balance_ratio": 0.0019,
+    "transactions_per_user": 0.0,
+    "transactions_last_1hr": 0.0,
+    "device_type_encoded": 0.0,
+    "deviation_from_avg": 0.0,
+    "OTP_flag": 0.0
+  },
+  "primary_model": "Random Forest",
+  "feature_columns": [
+    "log_amount",
+    "large_transaction_flag",
+    "balance_change_org",
+    "balance_change_dest",
+    "balance_ratio",
+    "type_encoded",
+    "transactions_per_user",
+    "transactions_last_1hr",
+    "device_type_encoded",
+    "device_change_flag",
+    "geo_distance",
+    "impossible_travel_flag",
+    "avg_transaction",
+    "deviation_from_avg",
+    "account_age",
+    "hour_of_day",
+    "is_night_flag",
+    "OTP_flag",
+    "QR_flag",
+    "login_attempts"
+  ],
+  "training_samples": 236880,
+  "test_samples": 40000,
+  "fraud_ratio": 0.013
+}
