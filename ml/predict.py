@@ -51,7 +51,7 @@ class HybridFraudEngine:
             self.rf_model = joblib.load(MODEL_DIR / "saved_model.pkl")
             self.iso_model = joblib.load(MODEL_DIR / "isolation_forest.pkl")
             self.scaler = joblib.load(MODEL_DIR / "scaler.pkl")
-            print("[✓] All models loaded successfully")
+            print("[OK] All models loaded successfully")
         except FileNotFoundError as e:
             print(f"[!] Model not found: {e}")
             print("[!] Run train.py first to train models")
