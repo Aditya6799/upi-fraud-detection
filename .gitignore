@@ -10,9 +10,8 @@ venv/
 env/
 .venv/
 
-# Data & Models (Do not push heavy models or datasets to GitHub)
+# Data (Do not push heavy datasets to GitHub)
 ml/data/*.csv
-ml/models/*.pkl
 
 # OS
 .DS_Store
