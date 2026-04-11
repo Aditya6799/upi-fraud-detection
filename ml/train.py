@@ -211,7 +211,7 @@ def train_and_evaluate():
     print("[SAVING] Models and artifacts...")
 
     joblib.dump(rf_model, MODEL_DIR / "saved_model.pkl")
-    print(f"  → saved_model.pkl (Random Forest)")
+    print(f"  -> saved_model.pkl (Random Forest)")
 
     joblib.dump(trained_models["Logistic Regression"], MODEL_DIR / "logistic_regression.pkl")
     joblib.dump(trained_models["SVM"], MODEL_DIR / "svm_model.pkl")
@@ -229,7 +229,7 @@ def train_and_evaluate():
     }
     with open(MODEL_DIR / "metrics.json", "w") as f:
         json.dump(metrics, f, indent=2)
-    print(f"  → metrics.json")
+    print(f"  -> metrics.json")
 
     # Generate visualization charts
     generate_charts(results, sorted_importance, y_test, X_test_scaled, trained_models)
@@ -266,7 +266,7 @@ def generate_charts(results, feature_importance, y_test, X_test_scaled, trained_
     fig.tight_layout()
     fig.savefig(CHARTS_DIR / "roc_curves.png", dpi=150, bbox_inches="tight")
     plt.close(fig)
-    print("  → roc_curves.png")
+    print("  -> roc_curves.png")
 
     # --- Confusion Matrix (Random Forest) ---
     rf = trained_models["Random Forest"]
@@ -292,7 +292,7 @@ def generate_charts(results, feature_importance, y_test, X_test_scaled, trained_
     fig.tight_layout()
     fig.savefig(CHARTS_DIR / "confusion_matrix.png", dpi=150, bbox_inches="tight")
     plt.close(fig)
-    print("  → confusion_matrix.png")
+    print("  -> confusion_matrix.png")
 
     # --- Feature Importance ---
     top_features = dict(list(feature_importance.items())[:12])
@@ -310,7 +310,7 @@ def generate_charts(results, feature_importance, y_test, X_test_scaled, trained_
     fig.tight_layout()
     fig.savefig(CHARTS_DIR / "feature_importance.png", dpi=150, bbox_inches="tight")
     plt.close(fig)
-    print("  → feature_importance.png")
+    print("  -> feature_importance.png")
 
 
 if __name__ == "__main__":
