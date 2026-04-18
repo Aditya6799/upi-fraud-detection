@@ -235,7 +235,7 @@ def train_and_evaluate():
     generate_charts(results, sorted_importance, y_test, X_test_scaled, trained_models)
 
     print(f"\n{'=' * 60}")
-    print("[✓] TRAINING COMPLETE")
+    print("[OK] TRAINING COMPLETE")
     print(f"    Primary model: Random Forest")
     print(f"    Final F1: {results['Random Forest']['f1_score']}")
     print(f"    Final AUC: {results['Random Forest']['roc_auc']}")

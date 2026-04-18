@@ -1,69 +1,69 @@
 {
   "models": {
     "Logistic Regression": {
-      "accuracy": 0.9955,
-      "precision": 0.7425,
-      "recall": 0.9981,
-      "f1_score": 0.8515,
+      "accuracy": 0.9959,
+      "precision": 0.7595,
+      "recall": 0.9962,
+      "f1_score": 0.8619,
       "roc_auc": 0.9999,
       "confusion_matrix": {
-        "TP": 519,
-        "TN": 39300,
-        "FP": 180,
-        "FN": 1
+        "TP": 518,
+        "TN": 39316,
+        "FP": 164,
+        "FN": 2
       }
     },
     "Random Forest": {
-      "accuracy": 0.9994,
-      "precision": 0.9646,
+      "accuracy": 0.9992,
+      "precision": 0.9486,
       "recall": 0.9942,
-      "f1_score": 0.9792,
+      "f1_score": 0.9709,
       "roc_auc": 1.0,
       "confusion_matrix": {
         "TP": 517,
-        "TN": 39461,
-        "FP": 19,
+        "TN": 39452,
+        "FP": 28,
         "FN": 3
       }
     },
     "SVM": {
-      "accuracy": 0.9975,
-      "precision": 0.8418,
-      "recall": 0.9923,
-      "f1_score": 0.9109,
+      "accuracy": 0.9977,
+      "precision": 0.8541,
+      "recall": 0.9904,
+      "f1_score": 0.9172,
       "roc_auc": 0.9999,
       "confusion_matrix": {
-        "TP": 516,
-        "TN": 39383,
-        "FP": 97,
-        "FN": 4
+        "TP": 515,
+        "TN": 39392,
+        "FP": 88,
+        "FN": 5
       }
     },
     "Isolation Forest": {
-      "accuracy": 0.9884,
-      "precision": 0.5539,
-      "recall": 0.5635,
-      "f1_score": 0.5586,
+      "accuracy": 0.9885,
+      "precision": 0.5579,
+      "recall": 0.5654,
+      "f1_score": 0.5616,
       "roc_auc": null
     }
   },
   "feature_importance": {
-    "login_attempts": 0.3425,
-    "transactions_per_user": 0.3316,
-    "account_age": 0.0941,
-    "device_change_flag": 0.0857,
-    "log_amount": 0.0359,
-    "is_night_flag": 0.032,
-    "type_encoded": 0.0244,
-    "large_transaction_flag": 0.0115,
-    "balance_ratio": 0.0095,
-    "geo_distance": 0.0079,
-    "impossible_travel_flag": 0.0073,
-    "hour_of_day": 0.0072,
-    "avg_transaction": 0.005,
-    "QR_flag": 0.0048,
+    "login_attempts": 0.3577,
+    "transactions_per_user": 0.3256,
+    "account_age": 0.0891,
+    "device_change_flag": 0.0803,
+    "log_amount": 0.0352,
+    "is_night_flag": 0.0315,
+    "type_encoded": 0.0241,
+    "large_transaction_flag": 0.0114,
+    "hour_of_day": 0.0106,
+    "balance_ratio": 0.0096,
+    "impossible_travel_flag": 0.0077,
+    "geo_distance": 0.0068,
+    "QR_flag": 0.0053,
+    "avg_transaction": 0.0046,
     "device_type_encoded": 0.0004,
-    "OTP_flag": 0.0002,
+    "OTP_flag": 0.0001,
     "transactions_last_1hr": 0.0
   },
   "primary_model": "Random Forest",
