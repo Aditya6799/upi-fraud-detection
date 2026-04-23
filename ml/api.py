@@ -180,7 +180,7 @@ def chat():
                 "source": "fallback"
             })
 
-        model = genai.GenerativeModel('gemini-2.0-flash-lite',
+        model = genai.GenerativeModel('gemini-flash-latest',
             generation_config={"temperature": 0.3, "top_p": 0.8, "max_output_tokens": 2048}
         )
 
