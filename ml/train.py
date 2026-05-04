@@ -191,11 +191,37 @@ def train_and_evaluate():
         "recall": round(iso_rec, 4),
         "f1_score": round(iso_f1, 4),
         "roc_auc": None,
+        "type": "anomaly_detection",
     }
     print(f"  Accuracy:  {iso_acc:.4f}")
     print(f"  Precision: {iso_prec:.4f}")
     print(f"  Recall:    {iso_rec:.4f}")
     print(f"  F1-Score:  {iso_f1:.4f}")
+
+    print(f"\n{'-' * 40}")
+    print("[TRAINING] Local Outlier Factor (LOF)...")
+    lof = LocalOutlierFactor(n_neighbors=20, contamination=0.013, novelty=True)
+    lof.fit(X_train_scaled)
+    lof_pred = lof.predict(X_test_scaled)
+    lof_pred_binary = (lof_pred == -1).astype(int)
+
+    lof_acc = accuracy_score(y_test, lof_pred_binary)
+    lof_prec = precision_score(y_test, lof_pred_binary, zero_division=0)
+    lof_rec = recall_score(y_test, lof_pred_binary, zero_division=0)
+    lof_f1 = f1_score(y_test, lof_pred_binary, zero_division=0)
+
+    results["LOF"] = {
+        "accuracy": round(lof_acc, 4),
+        "precision": round(lof_prec, 4),
+        "recall": round(lof_rec, 4),
+        "f1_score": round(lof_f1, 4),
+        "roc_auc": None,
+        "type": "anomaly_detection",
+    }
+    print(f"  Accuracy:  {lof_acc:.4f}")
+    print(f"  Precision: {lof_prec:.4f}")
+    print(f"  Recall:    {lof_rec:.4f}")
+    print(f"  F1-Score:  {lof_f1:.4f}")
 
     # Feature importance (from Random Forest)
     rf_model = trained_models["Random Forest"]
@@ -216,6 +242,7 @@ def train_and_evaluate():
     joblib.dump(trained_models["Logistic Regression"], MODEL_DIR / "logistic_regression.pkl")
     joblib.dump(trained_models["SVM"], MODEL_DIR / "svm_model.pkl")
     joblib.dump(iso_forest, MODEL_DIR / "isolation_forest.pkl")
+    joblib.dump(lof, MODEL_DIR / "lof_model.pkl")
     joblib.dump(scaler, MODEL_DIR / "scaler.pkl")
 
     metrics = {
@@ -311,6 +338,32 @@ def generate_charts(results, feature_importance, y_test, X_test_scaled, trained_
     fig.savefig(CHARTS_DIR / "feature_importance.png", dpi=150, bbox_inches="tight")
     plt.close(fig)
     print("  -> feature_importance.png")
+
+    # --- Model Comparison ---
+    model_names = [n for n in results if results[n].get("roc_auc") is not None]
+    metrics_to_plot = ["accuracy", "precision", "recall", "f1_score", "roc_auc"]
+    metric_labels = ["Accuracy", "Precision", "Recall", "F1-Score", "ROC-AUC"]
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+    x = np.arange(len(model_names))
+    width = 0.15
+    colors_bar = ["#6366f1", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"]
+
+    for i, (metric, label) in enumerate(zip(metrics_to_plot, metric_labels)):
+        values = [results[n][metric] for n in model_names]
+        ax.bar(x + i * width, values, width, label=label, color=colors_bar[i], edgecolor="none")
+
+    ax.set_xticks(x + width * 2)
+    ax.set_xticklabels(model_names, fontsize=11)
+    ax.set_ylabel("Score", fontsize=13)
+    ax.set_title("Model Comparison \u2014 All Metrics", fontsize=16, fontweight="bold")
+    ax.legend(fontsize=10)
+    ax.set_ylim(0, 1.1)
+    ax.set_facecolor("#fafbff")
+    fig.tight_layout()
+    fig.savefig(CHARTS_DIR / "model_comparison.png", dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    print("  -> model_comparison.png")
 
 
 if __name__ == "__main__":
